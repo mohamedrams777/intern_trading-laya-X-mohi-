@@ -1,0 +1,340 @@
+:root{
+  --bg:#0f1724; --card:#0b1220; --muted:#94a3b8; --accent:#00c2a8;
+  --glass: rgba(255,255,255,0.03);
+  color-scheme: dark;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; font-family:Inter, system-ui, Arial; background:linear-gradient(180deg,#071126,#071723);
+  color:#e6eef8; -webkit-font-smoothing:antialiased;
+}
+
+.chart-wrapper {
+  width: 80%;           /* reduce width to 80% of the card */
+  max-width: 1000px;    /* cap it at 1000px for large screens */
+  height: 400px;        /* control height */
+  margin: 0 auto;       /* center the chart */
+}
+
+#orderForm button {
+  padding: 5px 10px;        /* smaller height */
+  font-size: 0.85rem;       /* smaller text */
+  border-radius: 5px;
+  background: var(--accent);
+  color: #012;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 100px;             /* 🔹 control length */
+  display: block;
+  margin: 10px auto; 
+}
+
+#orderForm button:hover {
+  background: #00e0b0;   /* lighter hover effect */
+}
+
+
+
+@media (max-width: 1024px) {
+  .chart-wrapper {
+    width: 95%;         /* more flexible on smaller screens */
+    height: 350px;
+  }
+}
+.topbar{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:12px 20px; border-bottom:1px solid rgba(255,255,255,0.03);
+}
+.brand{font-weight:700; color:var(--accent)}
+/* Adjusting input padding to match button height better */
+.controls input{padding:4px 8px; border-radius:6px; border:1px solid rgba(255,255,255,0.06); background:transparent; color:inherit}
+
+/* Adjusting Load button size */
+.controls button{
+    margin-left:0; /* Removed margin-left to fit into input-group better */
+    padding:4px 8px; /* Reduced padding */
+    border-radius:6px;
+    background:var(--accent);
+    color:#012;
+    border:none;
+    font-weight:600;
+} 
+
+.logout-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.logout-btn:hover {
+  background-color: #218838;
+}
+.welcome {
+  color: #00b3b3;
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+
+/* Place Order button styling */
+.card button[type="submit"] {
+    padding: 8px 15px; /* Reduced padding for a smaller button */
+    font-size: 0.95rem; /* Reduced font size */
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #00cc66;
+    color: white;
+    border: none;
+    width: 100%;
+    margin-top: 10px;
+}
+.card button[type="submit"]:hover {
+    background-color: #00b359;
+}
+
+
+.grid{display:grid;grid-template-columns:1fr 360px;gap:18px;padding:18px}
+.card{background:var(--card); padding:12px;border-radius:10px; box-shadow: 0 6px 30px rgba(2,6,23,0.6); border:1px solid rgba(255,255,255,0.02)}
+.col-left .card.small{margin-top:12px}
+.meta{display:flex;gap:10px;margin-top:8px;color:var(--muted);font-size:13px}
+.orderbook-wrap{display:flex;gap:12px}
+.book-col{flex:1}
+.book-list{list-style:none;padding:6px;margin:0;max-height:160px;overflow:auto}
+.book-list li{display:flex;justify-content:space-between;padding:6px 8px;border-radius:6px;margin-bottom:6px;background:var(--glass);font-size:14px}
+.trades-list{list-style:none;padding:0;margin:0;max-height:220px;overflow:auto}
+.trades-list li{padding:8px;border-radius:6px;margin-bottom:6px;background:rgba(255,255,255,0.02);display:flex;justify-content:space-between}
+.footer{padding:10px 18px;color:var(--muted);font-size:13px}
+.info{margin-top:8px;color:var(--muted);font-size:13px}
+.market-data{font-size:14px;color:var(--muted)}
+
+
+/* 📰 News Section */
+.news-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 250px;
+  overflow-y: auto;
+}
+.news-list li {
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.9rem;
+}
+.news-list li a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.news-list li a:hover {
+  text-decoration: underline;
+}
+
+/* 💬 Chat Section */
+.chat-section {
+  display: flex;
+  flex-direction: column;
+  height: 350px;
+}
+.chat-box {
+  flex-grow: 1;
+  background: var(--glass);
+  border-radius: 8px;
+  padding: 10px;
+  overflow-y: auto;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+#chatForm {
+  display: flex;
+  gap: 8px;
+}
+#chatInput {
+  flex-grow: 1;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: white;
+}
+#chatForm button {
+  padding: 6px 12px;
+  background: var(--accent);
+  color: #012;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+#chatForm button:hover {
+  background: #00e0b0;
+}
+
+
+#chatBox {
+  background-color: #0b1220; /* dark background */
+  color: #ffffff; /* text color */
+  padding: 10px;
+  height: 200px; /* adjust as needed */
+  overflow-y: auto;
+  border: 1px solid #333;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+#chatBox div {
+  margin-bottom: 5px;
+}
+
+#chatInput {
+  width: calc(100% - 60px); /* leave space for button */
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #333;
+  background-color: #0b1220;
+  color: #fff;
+}
+
+#chatForm button {
+  padding: 6px 12px;
+  border-radius: 5px;
+  border: none;
+  background-color: #00c2a8;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* .user-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .user-dropdown .welcome {
+      cursor: pointer;
+      color: #00c2a8;
+      font-weight: bold;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: var(--card);
+      min-width: 160px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      border-radius: 8px;
+      z-index: 100;
+      right: 0;
+      top: 25px;
+    }
+
+    .dropdown-content a,
+    .dropdown-content button {
+      color: white;
+      padding: 10px 14px;
+      text-decoration: none;
+      display: block;
+      width: 100%;
+      text-align: left;
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+
+    .dropdown-content a:hover,
+    .dropdown-content button:hover {
+      background-color: rgba(255,255,255,0.1);
+    }
+
+    .show {
+      display: block;
+    } */
+  
+.user-dropdown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--card);
+  min-width: 150px;
+  right: 0;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  border-radius: 8px;
+  z-index: 10;
+}
+
+.user-dropdown.show .dropdown-content {
+  display: block;
+}
+
+.dropdown-content a,
+.dropdown-content form button {
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+  display: block;
+  border: none;
+  background: none;
+  text-align: left;
+  width: 100%;
+}
+
+.dropdown-content a:hover,
+.dropdown-content form button:hover {
+  background-color: var(--glass);
+}
+
+
+
+/* :root{
+  --bg:#0f1724; --card:#0b1220; --muted:#94a3b8; --accent:#00c2a8;
+  --glass: rgba(255,255,255,0.03);
+  color-scheme: dark;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; font-family:Inter, system-ui, Arial; background:linear-gradient(180deg,#071126,#071723);
+  color:#e6eef8; -webkit-font-smoothing:antialiased;
+} */
+
+/* .chart-wrapper {
+  width: 80%;          
+  max-width: 1000px;    
+  margin: 0 auto;      
+} */
+/* 
+@media (max-width: 1024px) {
+  .chart-wrapper {
+    width: 95%;        
+    height: 350px;
+  }
+}
+.topbar{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:12px 20px; border-bottom:1px solid rgba(255,255,255,0.03);
+}
+.brand{font-weight:700; color:var(--accent)}
+.controls input{padding:6px 8px; border-radius:6px; border:1px solid rgba(255,255,255,0.06); background:transparent; color:inherit}
+.controls button{margin-left:8px;padding:6px 10px;border-radius:6px;background:var(--accent);color:#012; border:none;font-weight:600}
+.grid{display:grid;grid-template-columns:1fr 360px;gap:18px;padding:18px}
+.card{background:var(--card); padding:12px;border-radius:10px; box-shadow: 0 6px 30px rgba(2,6,23,0.6); border:1px solid rgba(255,255,255,0.02)}
+.col-left .card.small{margin-top:12px}
+.meta{display:flex;gap:10px;margin-top:8px;color:var(--muted);font-size:13px}
+.orderbook-wrap{display:flex;gap:12px}
+.book-col{flex:1}
+.book-list{list-style:none;padding:6px;margin:0;max-height:160px;overflow:auto}
+.book-list li{display:flex;justify-content:space-between;padding:6px 8px;border-radius:6px;margin-bottom:6px;background:var(--glass);font-size:14px}
+.trades-list{list-style:none;padding:0;margin:0;max-height:220px;overflow:auto}
+.trades-list li{padding:8px;border-radius:6px;margin-bottom:6px;background:rgba(255,255,255,0.02);display:flex;justify-content:space-between}
+.footer{padding:10px 18px;color:var(--muted);font-size:13px}
+.info{margin-top:8px;color:var(--muted);font-size:13px}
+.market-data{font-size:14px;color:var(--muted)} */

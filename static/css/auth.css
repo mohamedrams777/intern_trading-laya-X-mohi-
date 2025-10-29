@@ -1,0 +1,89 @@
+/* ✅ Apply centering ONLY on the login page */
+body.login-page {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, #071126, #071723);
+  font-family: Inter, system-ui, Arial, sans-serif;
+  color: #e6eef8;
+}
+
+/* Main login box */
+.auth-container {
+  background: var(--card, #0b1220);
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+  width: 320px;
+  text-align: center;
+}
+
+/* Heading */
+.auth-container h2 {
+  margin-bottom: 20px;
+  color: var(--accent, #00c2a8);
+  font-weight: 700;
+}
+
+/* Labels and inputs */
+.auth-container label {
+  display: block;
+  text-align: left;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: var(--muted, #94a3b8);
+}
+
+.auth-container input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  background: #2b2b2b;
+  color: #fff;
+  font-size: 14px;
+}
+
+/* Login button (shorter width) */
+.auth-container button {
+  width: 60%;
+  padding: 10px;
+  background: #00cc66;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.auth-container button:hover {
+  background: #00b359;
+}
+
+/* Below-text + link */
+.auth-container p {
+  margin-top: 15px;
+  font-size: 13px;
+  color: var(--muted, #94a3b8);
+}
+
+.auth-container a {
+  color: var(--accent, #00c2a8);
+  text-decoration: none;
+}
+
+.auth-container a:hover {
+  text-decoration: underline;
+}
+
+/* Info message */
+.info {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--muted, #94a3b8);
+  text-align: center;
+}

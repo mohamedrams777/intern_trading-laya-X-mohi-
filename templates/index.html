@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Realtime Trading Dashboard</title>
+
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}" />
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Socket.IO client -->
+  <script src="https://cdn.jsdelivr.net/npm/socket.io-client/dist/socket.io.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@1.2.1/dist/chartjs-plugin-zoom.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+  <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+
+</head>
+<body>
+    
+  <header class="topbar">
+    <div class="brand">ADDA Trade - Dashboard</div>
+    <div class="controls">
+      <input id="symbolInput" type="text" placeholder="Symbol (AAPL)" value="AAPL" />
+      <button id="btnLoad">Load</button>
+    </div>
+    <div class="auth-buttons">
+      <div class="user-dropdown">
+        {% if username %}
+          <!-- <span class="welcome">Welcome, 
+            {{ username }} ▼</span> -->
+          <button id="usernameBtn" class="welcome">
+            Welcome, {{ username }} ▼
+          </button>
+          <div id="userMenu" class="dropdown-content">
+            <a href="/profile">Profile</a>
+            <a href="/portfolio">Portfolio</a>
+            <a href="/current-status">Current Status</a>
+            <form action="/api/logout" method="POST" style="display:inline;">
+              <button type="submit" class="btn-auth logout-btn">Logout</button>
+            </form>
+          </div>
+      {% else %}
+        <a href="/login" class="btn-auth">Login</a>
+        <a href="/signup" class="btn-auth">Sign Up</a>
+      {% endif %}
+      <!-- <a href="/login" class="btn-auth">Login</a>
+      <a href="/signup" class="btn-auth">Sign Up</a> -->
+      </div>
+    </div>
+  </header>
+
+  <main class="grid">
+    <section class="col-left">
+       <div class="card">
+        <h3>Market Price (Live)</h3>
+        <!-- <div style="overflow-x: auto; width: 100%;" width="1500" height="400px"> -->
+        <div class="chart-wrapper">
+        <canvas id="priceChart" ></canvas>
+       </div>
+       <div class="meta">
+            <span>Symbol: <strong id="currentSymbol">AAPL</strong></span>
+            <span>Last: <strong id="lastPrice">—</strong></span>
+            <span>Signal: <strong id="signal">—</strong></span>
+       </div>
+       </div>
+
+      <!-- <div class="card">
+        <h3>Market Price (Live)</h3>
+        <canvas id="priceChart" height="200"></canvas>
+        <div class="meta">
+          <span>Symbol: <strong id="currentSymbol">AAPL</strong></span>
+          <span>Last: <strong id="lastPrice">—</strong></span>
+          <span>Signal: <strong id="signal">—</strong></span>
+        </div>
+      </div> -->
+
+      <div class="card small">
+        <h3>Place Order</h3>
+        <form id="orderForm">
+          <label>Side
+            <select id="orderSide">
+              <option value="buy">Buy</option>
+              <option value="sell">Sell</option>
+            </select>
+          </label>
+          <label>Quantity
+            <input id="orderQty" type="number" step="any" value="1" />
+          </label>
+          <button type="submit">Place Order</button>
+        </form>
+        <!-- <div id="orderMsg" class="info"></div> -->
+      </div>
+
+      <div class="card">
+        <h3>Order Book</h3>
+        <div class="orderbook-wrap">
+          <div class="book-col">
+            <h4>Bids</h4>
+            <ul id="bidsList" class="book-list"></ul>
+          </div>
+          <div class="book-col">
+            <h4>Asks</h4>
+            <ul id="asksList" class="book-list"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="col-right">
+
+    
+       <!-- <div class="card">
+        <h3>Predicted Stock Price</h3>
+        <canvas id="predictionChart" height="200"></canvas>
+       </div> -->
+
+      <div class="card">
+        <h3>Trades</h3>
+        <ul id="tradesList" class="trades-list"></ul>
+      </div>
+
+      <div class="card">
+        <h3>Market Snapshot</h3>
+        <div id="marketData" class="market-data"></div>
+      </div>
+
+      <div class="card">
+        <h3>Orderbook Depth (Chart)</h3>
+        <canvas id="depthChart" height="200"></canvas>
+      </div>
+
+      <!-- 📰 News Section -->
+      <div class="card">
+        <h3>Latest Market News</h3>
+        <ul id="newsFeed" class="news-list"></ul>
+      </div>
+
+      <button id="communityChatBtn" class="btn-auth" style="margin-top: 10px;">Community Chat</button>
+
+
+      <!-- 💬 Chat Section -->
+      <div class="card chat-section">
+        <h3>Community Chat</h3>
+        <div id="chatBox" class="chat-box"></div>
+        <form id="chatForm">
+          <input id="chatInput" type="text" placeholder="Type a message..." required />
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">Built with ♥ — Local dev</footer>
+
+  <script src="{{ url_for('static', filename='js/dashboard.js') }}">
+    const modal = document.getElementById("authModal");
+    const loginSection = document.getElementById("loginSection");
+    const signupSection = document.getElementById("signupSection");
+    const closeBtn = document.querySelector(".close");
+    const switchToSignup = document.getElementById("switchToSignup");
+    const switchToLogin = document.getElementById("switchToLogin");
+
+    // Show modal on load
+    window.onload = () => { modal.style.display = "block"; };
+
+    // Close modal
+    closeBtn.onclick = () => { modal.style.display = "none"; };
+
+    // Switch forms
+    switchToSignup.onclick = () => {
+      loginSection.style.display = "none";
+      signupSection.style.display = "block";
+    };
+    switchToLogin.onclick = () => {
+      signupSection.style.display = "none";
+      loginSection.style.display = "block";
+  </script>
+</body>
+</html>

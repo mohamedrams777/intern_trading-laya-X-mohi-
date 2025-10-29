@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - ADDA Trade</title>
+  <!-- IMPORTANT: Using the single style.css file -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> 
+  <!-- Linking to the authentication-specific styles -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}"> 
+</head>
+<body class="login-page">
+  <div class="auth-container">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <label>Username
+        <input type="text" id="loginUsername" required> <!-- Changed to username -->
+      </label>
+      <label>Password
+        <input type="password" id="loginPassword" required>
+      </label>
+      <button type="submit">Login</button>
+      <!-- FIX: Changed 'signup' to 'routes.signup' to match the Flask endpoint name -->
+      <p>Don't have an account? <a href="{{ url_for('routes.signup') }}">Sign Up</a></p>
+    </form>
+    <div id="loginMsg" class="info"></div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+</body>
+</html>

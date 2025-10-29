@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Signup - ADDA Trade</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+</head>
+<body class="login-page">
+  <div class="auth-container">
+    <h2>Sign Up</h2>
+    <form id="signupForm">
+      <label>Name
+        <input type="text" id="signupName" required>
+      </label>
+      <label>Email
+        <input type="email" id="signupEmail" required>
+      </label>
+      <label>Password
+        <input type="password" id="signupPassword" required>
+      </label>
+      <label>Confirm Password
+        <input type="password" id="signupConfirmPassword" required>
+      </label>
+
+      <button type="submit">Sign Up</button>
+      <p>Already have an account? <a href="{{ url_for('routes.login') }}">Login</a></p>
+    </form>
+    <div id="signupMsg" class="info"></div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+</body>
+</html>

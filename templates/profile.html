@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Profile - ADDA Trade</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <style>
+    .profile-container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: var(--card, #101827);
+      color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--accent, #00c2a8);
+      margin-bottom: 25px;
+    }
+
+    .profile-info {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      row-gap: 15px;
+      column-gap: 20px;
+      align-items: center;
+    }
+
+    .profile-info strong {
+      color: var(--accent, #00c2a8);
+    }
+
+    .profile-card {
+      background: var(--glass, rgba(255,255,255,0.05));
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .actions {
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    .btn {
+      background: var(--accent, #00c2a8);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 5px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #00a590;
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      margin-bottom: 25px;
+    }
+
+    .profile-header img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid var(--accent, #00c2a8);
+      margin-bottom: 10px;
+    }
+
+    .profile-header h3 {
+      margin: 5px 0;
+    }
+
+    .profile-header span {
+      color: var(--muted, #94a3b8);
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">ADDA Trade - Profile</div>
+    <div class="controls">
+      <a href="/" class="btn-auth">Back to Dashboard</a>
+    </div>
+  </header>
+
+  <main class="profile-container">
+    <div class="profile-header">
+      <img src="{{ url_for('static', filename='images/default_avatar.png') }}" alt="User Avatar" />
+      <h3>{{ username or 'User123' }}</h3>
+      <span>Trader | Joined: {{ join_date or 'March 2024' }}</span>
+    </div>
+
+    <div class="profile-card">
+      <h2>Account Information</h2>
+      <div class="profile-info">
+        <strong>Email:</strong> <span>{{ email or 'user@example.com' }}</span>
+        <strong>Account Type:</strong> <span>{{ account_type or 'Standard' }}</span>
+        <strong>Phone:</strong> <span>{{ phone or '+91 98765 43210' }}</span>
+        <strong>Member Since:</strong> <span>{{ join_date or 'March 2024' }}</span>
+        <strong>Status:</strong> <span>Active</span>
+      </div>
+    </div>
+
+    <div class="profile-card">
+      <h2>Security Settings</h2>
+      <div class="profile-info">
+        <strong>Last Login:</strong> <span>{{ last_login or '2025-10-13 21:42' }}</span>
+        <strong>2FA Enabled:</strong> <span>{{ twofa or 'Yes' }}</span>
+        <strong>Password Updated:</strong> <span>{{ password_updated or '2025-09-20' }}</span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn" onclick="window.location.href='/edit-profile'">Edit Profile</button>
+      <button class="btn" onclick="window.location.href='/change-password'">Change Password</button>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Portfolio</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/portfolio.css') }}">
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header class="topbar">
+    <div class="brand">ADDA Trade - Portfolio</div>
+    <div class="controls">
+      <a href="/" class="btn-auth">Back to Dashboard</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="portfolio-container">
+    <!-- Summary Section -->
+    <section class="summary-cards">
+      <div class="card">
+        <h4>Total Balance</h4>
+        <p id="totalBalance">$0.00</p>
+      </div>
+      <div class="card">
+        <h4>Invested Amount</h4>
+        <p id="investedAmount">$0.00</p>
+      </div>
+      <div class="card">
+        <h4>Unrealized Profit</h4>
+        <p id="unrealizedProfit" class="profit">+$0.00</p>
+      </div>
+    </section>
+
+    <!-- Portfolio Table -->
+    <section class="holdings-section">
+      <h3>Your Holdings</h3>
+      <table class="holdings-table">
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Quantity</th>
+            <th>Avg Price ($)</th>
+            <th>Market Value ($)</th>
+            <th>P&L ($)</th>
+          </tr>
+        </thead>
+        <tbody id="holdingsTableBody">
+          <!-- Filled dynamically -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Portfolio Performance Chart -->
+    <section class="chart-section">
+      <h3>Portfolio Performance</h3>
+      <canvas id="portfolioChart" height="120"></canvas>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='js/portfolio.js') }}"></script>
+</body>
+</html>

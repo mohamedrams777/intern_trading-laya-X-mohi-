@@ -1,0 +1,15 @@
+Flask
+flask-sqlalchemy
+psycopg2-binary
+python-dotenv
+requests
+Flask-SocketIO
+eventlet
+APScheduler
+yfinance
+pandas
+numpy
+
+scikit-learn
+tensorflow
+matplotlib

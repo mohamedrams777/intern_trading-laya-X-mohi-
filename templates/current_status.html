@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Current Status - ADDA Trade</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <style>
+    .status-container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: var(--card, #101827);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      color: white;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: var(--accent, #00c2a8);
+    }
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .status-card {
+      background: var(--glass, rgba(255,255,255,0.05));
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+    }
+    .status-card h3 {
+      margin-bottom: 10px;
+      color: var(--accent, #00c2a8);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      text-align: left;
+    }
+    th {
+      color: var(--accent, #00c2a8);
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">ADDA Trade - Current Status</div>
+    <div class="controls">
+      <a href="/" class="btn-auth">Back to Dashboard</a>
+    </div>
+  </header>
+
+  <main class="status-container">
+    <h2>Account Overview</h2>
+
+    <div class="status-grid">
+      <div class="status-card">
+        <h3>Account Balance</h3>
+        <p>₹ 1,25,000</p>
+      </div>
+      <div class="status-card">
+        <h3>Invested Amount</h3>
+        <p>₹ 80,000</p>
+      </div>
+      <div class="status-card">
+        <h3>Unrealized Profit</h3>
+        <p>₹ 45,000</p>
+      </div>
+    </div>
+
+    <h2 style="margin-top: 40px;">Recent Trades</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Symbol</th>
+          <th>Action</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>AAPL</td>
+          <td>Buy</td>
+          <td>10</td>
+          <td>₹15,200</td>
+          <td>2025-10-12</td>
+        </tr>
+        <tr>
+          <td>TSLA</td>
+          <td>Sell</td>
+          <td>5</td>
+          <td>₹20,400</td>
+          <td>2025-10-10</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>

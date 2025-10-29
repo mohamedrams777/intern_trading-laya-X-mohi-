@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Community Chat</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/socket.io/dist/socket.io.min.js"></script>
+  <script src="{{ url_for('static', filename='js/community_chat.js') }}"></script>
+  <!-- <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script> -->
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">ADDA Trade - Community Chat</div>
+    <div class="controls">
+      <a href="/" class="btn-auth">Back to Dashboard</a>
+    </div>
+  </header>
+
+  <main style="padding: 20px; max-width: 800px; margin: auto;">
+    <div class="card chat-section">
+      <h3>Community Chat</h3>
+      <div id="chatBox" class="chat-box"></div>
+      <form id="chatForm">
+        <input id="chatInput" type="text" placeholder="Type a message..." required />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
