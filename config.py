@@ -5,7 +5,7 @@ load_dotenv()
 
 class Config:
     DB_USER = os.getenv("DB_USER", "trading_user")
-    DB_PASSWORD = os.getenv("DB_PASSWORD", "trading123")
+    DB_PASSWORD = os.getenv("DB_PASSWORD", "your_passowrd")
     DB_NAME = os.getenv("DB_NAME", "trading_system")
     DB_HOST = os.getenv("DB_HOST", "localhost")
     DB_PORT = os.getenv("DB_PORT", "5432")
@@ -20,3 +20,4 @@ class Config:
     ALPHA_VANTAGE_KEY = os.getenv("ALPHA_VANTAGE_KEY")
     FINNHUB_KEY = os.getenv("FINNHUB_KEY")
     GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
