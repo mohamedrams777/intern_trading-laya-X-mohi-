@@ -5,7 +5,7 @@ from market_data import get_price_for_symbol
 from simulation import monte_carlo_gbm, summarize_final_prices
 from realtime import socketio, broadcast_news
 from gemini_client import ask_gemini
-from utils import fetch_data, train_model, predict_future, monte_carlo_simulation
+from utils import fetch_data, monte_carlo_simulation
 from flask_login import login_user, logout_user, current_user, login_required 
 from flask import redirect, url_for
 
@@ -16,9 +16,6 @@ import matplotlib.pyplot as plt
 import yfinance as yf
 import pandas as pd
 import numpy as np
-from sklearn.preprocessing import MinMaxScaler
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import LSTM, Dense
 
 # ✅ Define Blueprint here
 routes_bp = Blueprint("routes", __name__)
@@ -35,17 +32,7 @@ def api_signup():
     password = data.get('password')
     confirm_password = data.get('confirm_password')
     email = data.get('email')
-
-    # 1. Basic Validation 
-    if not username or not password or not confirm_password:
-        return jsonify({"message": "Missing required fields (username, password, confirm_password)"}), 400
-        
-    if password != confirm_password:
-        return jsonify({"message": "Passwords do not match"}), 400
-
-    # 2. Check if user already exists in the database
-    if db.session.execute(db.select(User).filter_by(username=username)).scalar_one_or_none():
-        return jsonify({"message": "Username already exists"}), 409
+    
     
     # 3. Create a new User object
     new_user = User(username=username, email=email)
@@ -302,6 +289,9 @@ def predict_stock():
         df = fetch_data(symbol)
         if df is None or df.empty:
             return jsonify({"error": f"No data found for {symbol}"}), 404
+
+        # Lazy import heavy ML functions so app can boot without TensorFlow installed
+        from utils import train_model, predict_future
 
         model, scaler = train_model(df)
 

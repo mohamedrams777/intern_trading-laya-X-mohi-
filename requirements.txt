@@ -13,3 +13,5 @@ numpy
 scikit-learn
 tensorflow
 matplotlib
+flask-cors
+flask-login

@@ -82,9 +82,7 @@
 import yfinance as yf
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import MinMaxScaler
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import LSTM, Dense
+
 
 # ------------------- DATA FETCHING -------------------
 
@@ -112,6 +110,11 @@ def train_model(df):
     Train a simple LSTM model on the 'Close' prices.
     Returns the trained model and the scaler.
     """
+    # Lazy-import ML libraries so the app can start without heavy dependencies
+    from sklearn.preprocessing import MinMaxScaler
+    from tensorflow.keras.models import Sequential
+    from tensorflow.keras.layers import LSTM, Dense
+
     close_prices = df['Close'].values.reshape(-1, 1)
     scaler = MinMaxScaler(feature_range=(0, 1))
     scaled_data = scaler.fit_transform(close_prices)

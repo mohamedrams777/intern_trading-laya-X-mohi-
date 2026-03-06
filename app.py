@@ -7,7 +7,7 @@ from routes import routes_bp
 from realtime import socketio
 from scheduler import start_scheduler
 from extra_routes import extra_bp
-from market_snapshot import market_bp, socketio, start_market_thread
+from market_snapshot import market_bp, start_market_thread
 
 
 login_manager = LoginManager()
@@ -50,4 +50,4 @@ def create_app():
 if __name__ == "__main__":
     app = create_app()
     start_scheduler(app)
-    socketio.run(app, host="0.0.0.0", port=5000, debug=True)
+    socketio.run(app, host="127.0.0.1", port=3000, debug=False, allow_unsafe_werkzeug=True)

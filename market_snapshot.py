@@ -1,12 +1,11 @@
 # market_snapshot.py
 from flask import Blueprint, jsonify
-from flask_socketio import SocketIO
+from realtime import socketio
 import yfinance as yf
 import threading
 import time
 
 market_bp = Blueprint("market_bp", __name__)
-socketio = SocketIO()  # This will be initialized in main app
 
 # ------------------ Market Snapshot API ------------------
 @market_bp.route("/api/market_snapshot/<symbol>", methods=["GET"])
@@ -18,11 +17,11 @@ def market_snapshot(symbol):
         if hist.empty:
             return jsonify({"error": "No data found"}), 404
         
-        last = hist['Close'][-1]
-        open_price = hist['Open'][0]
+        last = hist['Close'].iloc[-1]
+        open_price = hist['Open'].iloc[0]
         high = hist['High'].max()
         low = hist['Low'].min()
-        volume = int(hist['Volume'][-1])
+        volume = int(hist['Volume'].iloc[-1])
         
         # Fake bid/ask for demo
         bid = round(last * 0.995, 2)
@@ -50,7 +49,7 @@ def emit_market_snapshot(symbol="AAPL"):
             data = yf.Ticker(symbol)
             hist = data.history(period="1d", interval="1m")
             if not hist.empty:
-                last = hist['Close'][-1]
+                last = hist['Close'].iloc[-1]
                 bid = round(last * 0.995, 2)
                 ask = round(last * 1.005, 2)
                 socketio.emit("market_snapshot_update", {
